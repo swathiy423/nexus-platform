@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #232941 transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-base-950 text-ink-100 font-body antialiased;
+  cursor: none; /* replaced by CustomCursor component */
+}
+
+@media (max-width: 768px), (hover: none) {
+  body {
+    cursor: auto;
+  }
+}
+
+/* Respect reduced-motion preference everywhere */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.glass {
+  @apply bg-base-800/60 backdrop-blur-xl border border-white/5 shadow-glass;
+}
+
+.skeleton {
+  @apply relative overflow-hidden bg-base-700/60 rounded-lg;
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+  background-size: 400px 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+.focus-ring {
+  @apply outline-none focus-visible:ring-2 focus-visible:ring-signal-violet focus-visible:ring-offset-2 focus-visible:ring-offset-base-950;
+}
